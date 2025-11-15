@@ -1,0 +1,3 @@
+# Replace with your actual project ID
+project_id = "your-project-id-here"
+region     = "europe-north1"

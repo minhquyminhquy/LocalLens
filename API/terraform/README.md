@@ -1,0 +1,97 @@
+# Terraform Setup
+
+## Prerequisites
+
+1. Terraform installed
+   ```bash
+    terraform --version
+    ```
+2. Createa a Google Cloud project and enable billing. 
+3. **Authenticate with Google Cloud:**
+   ```bash
+   gcloud auth application-default login
+
+   gcloud config set project YOUR_PROJECT_ID
+   ```
+
+## What This Creates
+
+1. Enables Places API (`places-backend.googleapis.com`)
+2. Enables Generative AI API (`generativelanguage.googleapis.com`) for Gemini
+3. Enables API Keys API (`apikeys.googleapis.com`)
+4. Creates a restricted API key for Places API
+5. Creates a restricted API key for Gemini AI  
+
+## Setup
+
+1. Setup the variables
+```bash
+cp terraform.tfvars.example terraform.tfvars
+```
+
+2. Initialize Terraform
+```bash
+terraform init
+```
+
+3. Review Plan
+```bash
+terraform plan
+```
+
+4. Apply Configuration
+
+```bash
+terraform apply
+```
+
+Type `yes` when prompted.
+
+5. Extract API Keys
+
+After Terraform finishes, run the setup script to automatically create your `.env` file:
+
+```bash
+chmod +x setup-env.sh
+./setup-env.sh
+```
+
+This script will:
+- Extract both API keys from Terraform outputs
+- Create a `.env` file in the API directory with both keys
+- Create individual key files for reference
+
+Alternatively, you can manually extract the keys:
+
+```bash
+# Save Places API key
+terraform output -raw places_api_key > places-api-key.txt
+
+# Save Gemini API key
+terraform output -raw gemini_api_key > gemini-api-key.txt
+```
+
+
+
+## Cleanup
+
+When you're finished with the project and want to remove all infrastructure:
+
+```bash
+terraform destroy
+```
+
+Type `yes` when prompted.
+
+## Security Notes
+
+⚠️ **IMPORTANT**: Never commit the following files to version control:
+- `terraform.tfvars` (contains your project ID)
+- `.env` (contains API keys)
+- `places-api-key.txt` (contains API key)
+- `gemini-api-key.txt` (contains API key)
+- `.terraform/` directory
+- `*.tfstate` files
+
+These should be included in `.gitignore`.
+
