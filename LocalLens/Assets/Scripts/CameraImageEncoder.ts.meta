@@ -1,0 +1,44 @@
+- !<AssetImportMetadata/ed95e41d-9808-40ed-b511-b64dead2911e>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 79d142e9-aba6-498f-b909-0aaea8c67203
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 79d142e9-aba6-498f-b909-0aaea8c67203
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> d10efe25-2274-4193-91e0-b79f37b6a4c6
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/d10efe25-2274-4193-91e0-b79f37b6a4c6>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: e0acb3be-ca6f-42f8-af24-d170748986a5
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    deviceCamTexture: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - deviceCamTexture: !<reference.Texture> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input Asset.Texture deviceCamTexture
