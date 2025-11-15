@@ -14,3 +14,8 @@ output "gemini_api_key" {
   value       = google_apikeys_key.gemini_api_key.key_string
   sensitive   = true
 }
+
+output "cloud_run_url" {
+  description = "URL of the deployed Cloud Run service"
+  value       = google_cloud_run_v2_service.restaurant_api.uri
+}

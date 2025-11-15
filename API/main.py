@@ -33,8 +33,8 @@ async def root():
 async def health():
     return {
         "status": "healthy",
-        "google_maps": "configured" if GOOGLE_MAPS_API_KEY else "not configured",
-        "gemini_ai": "configured" if GEMINI_API_KEY else "not configured"
+        "google_maps": "configured" if os.getenv("GOOGLE_MAPS_API_KEY") else "not configured",
+        "gemini_ai": "configured" if os.getenv("GEMINI_API_KEY") else "not configured"
     }
 
 
