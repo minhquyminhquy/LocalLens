@@ -1,5 +1,7 @@
 import os
 import json
+import base64
+from typing import Optional
 from fastapi import FastAPI, HTTPException, File, UploadFile, Form
 from dotenv import load_dotenv
 import googlemaps
@@ -40,11 +42,42 @@ async def health():
 
 @app.post("/identify-restaurant")
 async def identify_restaurant(
-    file: UploadFile = File(...),
     latitude: float = Form(...),
-    longitude: float = Form(...)
+    longitude: float = Form(...),
+    file: Optional[UploadFile] = File(None),
+    image_base64: Optional[str] = Form(None)
 ):
     try:
+        # Validate that at least one image input is provided
+        if not file and not image_base64:
+            raise HTTPException(
+                status_code=400, 
+                detail="Either 'file' or 'image_base64' must be provided"
+            )
+        
+        if file and image_base64:
+            raise HTTPException(
+                status_code=400,
+                detail="Provide either 'file' or 'image_base64', not both"
+            )
+        
+        # Load image from either source
+        if file:
+            # Read uploaded file
+            image_data = await file.read()
+        else:
+            # Decode base64 string
+            try:
+                # Remove data URL prefix if present (e.g., "data:image/jpeg;base64,")
+                if ',' in image_base64:
+                    image_base64 = image_base64.split(',', 1)[1]
+                image_data = base64.b64decode(image_base64)
+            except Exception as e:
+                raise HTTPException(
+                    status_code=400,
+                    detail=f"Invalid base64 image data: {str(e)}"
+                )
+        
         # Search for nearby restaurants
         places_result = gmaps.places_nearby(
             location=(latitude, longitude),
@@ -71,9 +104,10 @@ async def identify_restaurant(
                 "nearby_count": 0
             }
         
-        # Analyze image with Gemini AI
-        image_data = await file.read()
+        # Open image using PIL
         image = Image.open(io.BytesIO(image_data))
+        
+        # Analyze image with Gemini AI
         model = genai.GenerativeModel('gemini-2.0-flash')
         
         # Create restaurant list for AI
