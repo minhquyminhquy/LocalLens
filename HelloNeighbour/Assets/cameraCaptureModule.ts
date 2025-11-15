@@ -2,8 +2,13 @@
 //let cameraRequest = CameraModule.create
 
 @component
-export class NewScript extends BaseScriptComponent {
+export class cameraModule extends BaseScriptComponent {
+    onPressDown ()  {
+        print("Button Pressed Down");
+    }
+
     onAwake() {
         // imageBase64
     }
 }
+

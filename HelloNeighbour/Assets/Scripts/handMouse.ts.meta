@@ -1,0 +1,44 @@
+- !<AssetImportMetadata/c4da7b41-2be6-4f5f-a4b0-4ffb6397f45d>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 8b2d97ec-0f4c-4ea8-94dd-b05933e588e4
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 8b2d97ec-0f4c-4ea8-94dd-b05933e588e4
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 6c2fe908-0868-420f-a9a8-0702f9c281e7
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/6c2fe908-0868-420f-a9a8-0702f9c281e7>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 698c874a-d460-4218-93fe-88a8776df709
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    keypointPrefab: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - keypointPrefab: !<reference.ObjectPrefab> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input Asset.ObjectPrefab keypointPrefab

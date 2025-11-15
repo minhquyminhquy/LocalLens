@@ -19,11 +19,14 @@ export class PictureController extends BaseScriptComponent {
     this.leftHand.onPinchDown.add(this.leftPinchDown);
     if (this.isEditor) {
       this.createEvent("TouchStartEvent").bind(this.editorTest.bind(this));
+      print("TouchStartEvent");
     } else {
         var obj = this.getSceneObject();
         if (obj.getChildrenCount() > 0){
             obj.getChild(0).destroy();    
         }
+
+        print("it get something else");
     }
   }
 

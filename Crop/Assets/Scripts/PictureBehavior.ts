@@ -63,8 +63,11 @@ export class PictureBehavior extends BaseScriptComponent {
       delayedEvent.bind(() => {
         this.loadingObj.enabled = true;
         this.cropRegion.enabled = false;
+        // image is captured here
         this.captureRendMesh.mainPass.captureImage =
           ProceduralTextureProvider.createFromTexture(this.screenCropTexture);
+        
+        print("INFO: Image is captured");
 
       });
       delayedEvent.reset(0.1);

@@ -13,6 +13,7 @@ export class Location extends BaseScriptComponent {
   private repeatUpdateUserLocation: DelayedCallbackEvent;
   private locationService: LocationService;
   onAwake() {
+    
     this.createEvent('OnStartEvent').bind(() => {
       this.createAndLogLocationAndHeading();
     });

@@ -1,0 +1,44 @@
+- !<AssetImportMetadata/11ca934a-c3b8-44c2-884f-81d5e74e739e>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> f187f2ea-031e-41d4-8c52-64f9a6d1ba6b
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> f187f2ea-031e-41d4-8c52-64f9a6d1ba6b
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> a5e685df-dfaa-4084-bd65-206cd6d9309a
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/a5e685df-dfaa-4084-bd65-206cd6d9309a>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: a0c8b08d-e4dc-4775-8489-4e57e54d6405
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    imageCaptureComponent: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - imageCaptureComponent: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input AssignableType imageCaptureComponent
