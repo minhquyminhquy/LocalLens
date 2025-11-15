@@ -1,6 +1,6 @@
 # Restaurant Identification API
 
-AI-powered restaurant identification service built for **Snapchat Spectacles Lens** at **Junction 2025** in Espoo, Finland. Upload a restaurant photo with GPS coordinates to get instant identification, reviews, ratings, and AI-generated summaries using Google Gemini Vision and Google Places API.
+AI-powered restaurant identification service built for **Snapchat Spectacles Lens** at **Junction 2025** in Espoo, Finland for the Wolt main challenge. Upload a restaurant photo with GPS coordinates to get instant identification, reviews, ratings, and AI-generated summaries using Google Gemini Vision and Google Places API.
 
 **Live API**: `https://restaurant-api-xztpop2o2q-lz.a.run.app`
 
