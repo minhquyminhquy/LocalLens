@@ -1,0 +1,10 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# API Keys and Credentials
+*-api-key.txt
+*.tfvars
+.env
