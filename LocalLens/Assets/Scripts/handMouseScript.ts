@@ -1,6 +1,7 @@
 import { SIK } from "SpectaclesInteractionKit.lspkg/SIK";
 import { CameraImageEncoder } from "./CameraImageEncoder";
 import { Location } from "./locationModule";
+import { Frame } from 'SpectaclesUIKit.lspkg/Scripts/Components/Frame/Frame';
 
 const API_BASE_URL = "https://restaurant-api-xztpop2o2q-lz.a.run.app";
 
@@ -22,6 +23,19 @@ export class handMouseScript extends BaseScriptComponent {
   @input location: Location;
 
   private internetModule: InternetModule = require('LensStudio:InternetModule');
+
+  // For the panel
+  createContent() {
+    const child = global.scene.createSceneObject('Child');
+    child.setParent(this.sceneObject);
+    const text = child.createComponent('Text');
+    text.text = 'Frame!';
+    text.size = 200;
+    const screenTransform = child.createComponent('ScreenTransform');
+    screenTransform.anchors = Rect.create(-1, 1, -1, 1);
+    screenTransform.offsets.setSize(new vec2(15, 20));
+    screenTransform.position = new vec3(0, 0, 0.01);
+  }
 
   onAwake() {
     this.createEvent('OnStartEvent').bind(() => {
@@ -188,6 +202,12 @@ export class handMouseScript extends BaseScriptComponent {
 
     leftHand.onPinchDown.add(() => {
       // Left hand pinch handler (if needed)
+      print("Left hand pinched down");
+      const frame = this.sceneObject.createComponent(Frame.getTypeName());
+      frame.initialize();
+      frame.innerSize = new vec2(15, 20);
+
+      this.createContent();
     });
 
     rightHand.onPinchDown.add(() => {
