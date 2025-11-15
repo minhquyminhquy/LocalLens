@@ -1,7 +1,7 @@
 require('LensStudio:RawLocationModule');
 
 @component
-export class LocationExample extends BaseScriptComponent {
+export class Location extends BaseScriptComponent {
   latitude: number;
   longitude: number;
   altitude: number;

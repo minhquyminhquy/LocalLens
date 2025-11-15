@@ -1,6 +1,5 @@
 import { SIK } from "SpectaclesInteractionKit.lspkg/SIK";
 import { CropRegion } from "./CropRegion";
-import { ChatGPT } from "./ChatGPT";
 import { CaptionBehavior } from "./CaptionBehavior";
 
 const BOX_MIN_SIZE = 8; //min size in cm for image capture
@@ -14,7 +13,6 @@ export class PictureBehavior extends BaseScriptComponent {
   @input captureRendMesh: RenderMeshVisual;
   @input screenCropTexture: Texture;
   @input cropRegion: CropRegion;
-  @input chatGPT: ChatGPT;
   @input caption: CaptionBehavior;
 
   private isEditor = global.deviceInfoSystem.isEditor();
@@ -67,13 +65,7 @@ export class PictureBehavior extends BaseScriptComponent {
         this.cropRegion.enabled = false;
         this.captureRendMesh.mainPass.captureImage =
           ProceduralTextureProvider.createFromTexture(this.screenCropTexture);
-        this.chatGPT.makeOCRRequest(
-          this.captureRendMesh.mainPass.captureImage,
-          (response) => {
-            this.loadingObj.enabled = false;
-            this.loadCaption(response);
-          }
-        );
+
       });
       delayedEvent.reset(0.1);
     } else {
@@ -141,14 +133,6 @@ export class PictureBehavior extends BaseScriptComponent {
       //remove update loop and process image
       this.loadingObj.enabled = true;
       this.cropRegion.enabled = false;
-
-      this.chatGPT.makeOCRRequest(
-        this.captureRendMesh.mainPass.captureImage,
-        (response) => {
-          this.loadingObj.enabled = false;
-          this.loadCaption(response);
-        }
-      );
     }
   }
 
