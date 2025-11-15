@@ -6,12 +6,15 @@
    ```bash
     terraform --version
     ```
-2. Createa a Google Cloud project and enable billing. 
+2. Create a Google Cloud project and enable billing. 
 3. **Authenticate with Google Cloud:**
    ```bash
    gcloud auth application-default login
-
    gcloud config set project YOUR_PROJECT_ID
+   ```
+4. **Enable Cloud Resource Manager API** (required for Terraform to manage other APIs):
+   ```bash
+   gcloud services enable cloudresourcemanager.googleapis.com --project=YOUR_PROJECT_ID
    ```
 
 ## What This Creates
@@ -20,13 +23,19 @@
 2. Enables Generative AI API (`generativelanguage.googleapis.com`) for Gemini
 3. Enables API Keys API (`apikeys.googleapis.com`)
 4. Creates a restricted API key for Places API
-5. Creates a restricted API key for Gemini AI  
+5. Creates a restricted API key for Gemini AI
+6. Enables Cloud Run API (`run.googleapis.com`)
+7. Enables Artifact Registry (`artifactregistry.googleapis.com`)
+8. Enables Cloud Build (`cloudbuild.googleapis.com`)
+9. **Deploys FastAPI application to Cloud Run**
+10. **Provides public HTTPS URL**  
 
 ## Setup
 
 1. Setup the variables
 ```bash
 cp terraform.tfvars.example terraform.tfvars
+# Edit terraform.tfvars and set your project_id
 ```
 
 2. Initialize Terraform
@@ -47,7 +56,20 @@ terraform apply
 
 Type `yes` when prompted.
 
-5. Extract API Keys
+## Deploy to Cloud Run
+
+```bash
+cd ..
+./deploy.sh
+```
+
+Get your URL:
+```bash
+cd terraform
+terraform output -raw cloud_run_url
+```
+
+## Extract API Keys (For Local Development)
 
 After Terraform finishes, run the setup script to automatically create your `.env` file:
 

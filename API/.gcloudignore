@@ -1,0 +1,19 @@
+# .gcloudignore - files to exclude from Cloud Build upload
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.env
+.env.example
+.venv
+venv/
+terraform/
+README.md
+.git
+.gitignore
+*.md
+.python-version
+*.jpg
+*.png
+*.txt
+!pyproject.toml
