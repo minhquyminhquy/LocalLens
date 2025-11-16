@@ -203,11 +203,16 @@ export class handMouseScript extends BaseScriptComponent {
     leftHand.onPinchDown.add(() => {
       // Left hand pinch handler (if needed)
       print("Left hand pinched down");
-      const frame = this.sceneObject.createComponent(Frame.getTypeName());
+
+      const frameObject = global.scene.createSceneObject('FrameTest');
+      frameObject.setParent(this.sceneObject);
+  
+      const frame = new Frame();
+      frame.sceneObject = frameObject;
       frame.initialize();
       frame.innerSize = new vec2(15, 20);
 
-      this.createContent();
+  this.createContent();
     });
 
     rightHand.onPinchDown.add(() => {
@@ -259,6 +264,7 @@ export class handMouseScript extends BaseScriptComponent {
                     
                     // TODO: Display restaurantInfo in AR UI
                     // You can use restaurantInfo here for further processing
+                    this.createRestaurantPanel(restaurantInfo);
                   })
                   .catch((error: Error) => {
                     print("========================================");
@@ -281,5 +287,76 @@ export class handMouseScript extends BaseScriptComponent {
         print("Error: CameraImageEncoder not assigned!");
       }
     });
+
+    
+  }
+
+  /**
+   * Creates a popup panel displaying restaurant information
+   * @param restaurantInfo - Restaurant data to display
+   */
+  private createRestaurantPanel(restaurantInfo: RestaurantInfo) {
+    // Create main panel object
+    const panelObject = global.scene.createSceneObject('RestaurantPanel');
+    panelObject.setParent(this.sceneObject);
+    
+    // Add Frame component for the panel background
+    const frame = new Frame();
+    frame.sceneObject = panelObject;
+    frame.initialize();
+    frame.innerSize = new vec2(30, 25);
+    
+    // Position the panel in front of the camera
+    const screenTransform = panelObject.getComponent('ScreenTransform');
+    if (screenTransform) {
+      screenTransform.anchors = Rect.create(-0.5, 0.5, -0.5, 0.5);
+      screenTransform.offsets = Rect.create(-15, 15, -12.5, 12.5);
+      screenTransform.position = new vec3(0, 0, 10);
+    }
+    
+    // Create restaurant name (top-left)
+    const nameObject = global.scene.createSceneObject('RestaurantName');
+    nameObject.setParent(panelObject);
+    const nameText = nameObject.createComponent('Text') as Text;
+    nameText.text = restaurantInfo.name;
+    nameText.size = 60;
+    nameText.horizontalAlignment = HorizontalAlignment.Left;
+    nameText.verticalAlignment = VerticalAlignment.Top;
+    
+    const nameTransform = nameObject.createComponent('ScreenTransform');
+    nameTransform.anchors = Rect.create(-1, 1, 0, 1);
+    nameTransform.offsets = Rect.create(1, 14, -3, -1);
+    nameTransform.position = new vec3(0, 0, 0.01);
+    
+    // Create rating (top-right)
+    const ratingObject = global.scene.createSceneObject('RestaurantRating');
+    ratingObject.setParent(panelObject);
+    const ratingText = ratingObject.createComponent('Text') as Text;
+    ratingText.text = '⭐ ' + restaurantInfo.rating.toFixed(1);
+    ratingText.size = 60;
+    ratingText.horizontalAlignment = HorizontalAlignment.Right;
+    ratingText.verticalAlignment = VerticalAlignment.Top;
+    
+    const ratingTransform = ratingObject.createComponent('ScreenTransform');
+    ratingTransform.anchors = Rect.create(0, 1, 0, 1);
+    ratingTransform.offsets = Rect.create(-14, -1, -3, -1);
+    ratingTransform.position = new vec3(0, 0, 0.01);
+    
+    // Create summary (middle)
+    const summaryObject = global.scene.createSceneObject('RestaurantSummary');
+    summaryObject.setParent(panelObject);
+    const summaryText = summaryObject.createComponent('Text') as Text;
+    summaryText.text = restaurantInfo.summary;
+    summaryText.size = 45;
+    summaryText.horizontalAlignment = HorizontalAlignment.Center;
+    summaryText.verticalAlignment = VerticalAlignment.Center;
+    
+    const summaryTransform = summaryObject.createComponent('ScreenTransform');
+    summaryTransform.anchors = Rect.create(-1, 1, -1, 0.5);
+    summaryTransform.offsets = Rect.create(1, -1, 1, -1);
+    summaryTransform.position = new vec3(0, 0, 0.01);
+    
+    print("Restaurant panel created successfully!");
   }
 }
+
